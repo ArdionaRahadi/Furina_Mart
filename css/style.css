@@ -1,0 +1,24 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/furina.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+form {
+    background: lightblue;
+    width: 100%;
+}
+
+.login {
+    font-weight: bold;
+    font-size: 2.5em;
+}
+
+.btn {
+    width: 100%;
+    font-weight: bold;
+}
