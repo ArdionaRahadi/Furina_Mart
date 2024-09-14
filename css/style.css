@@ -1,24 +1,43 @@
-body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url(../img/furina.jpeg);
-    background-size: cover;
-    background-repeat: no-repeat;
+.background-image {
+  height: 100vh;
+  background: url(../img/furina.jpeg) no-repeat;
+  background-size: cover;
 }
 
-form {
-    background: lightblue;
-    width: 100%;
+.form {
+  width: 650px;
 }
 
 .login {
-    font-weight: bold;
-    font-size: 2.5em;
+  width: 100%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(15, 15, 175, 1) 34%,
+    rgba(0, 212, 255, 1) 82%
+  );
 }
 
-.btn {
-    width: 100%;
-    font-weight: bold;
+/* BREAK POINT */
+/* LAPTOP */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* TABLET */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+}
+
+/* MOBILE */
+@media only screen and (max-width: 767px) {
+  .form {
+    width: 375px;
+  }
+}
+
+/* SMALL MOBILE */
+@media only screen and (max-width: 392px) {
+  .form {
+    width: 350px;
+  }
 }
