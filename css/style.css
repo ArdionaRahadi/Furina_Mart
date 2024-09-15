@@ -1,43 +1,58 @@
+:root {
+    --offcanvas-width: 270px;
+    --topNavbarHeight: 56px;
+}
+
 .background-image {
-  height: 100vh;
-  background: url(../img/furina.jpeg) no-repeat;
-  background-size: cover;
+    height: 100vh;
+    background: url(../img/furina.jpeg) no-repeat;
+    background-size: cover;
 }
 
 .form {
-  width: 650px;
+    width: 650px;
 }
 
 .login {
-  width: 100%;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(15, 15, 175, 1) 34%,
-    rgba(0, 212, 255, 1) 82%
-  );
+    width: 100%;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(15, 15, 175, 1) 34%,
+        rgba(0, 212, 255, 1) 82%
+    );
+}
+
+div#offcanvasExample {
+    width: var(--offcanvas-width);
 }
 
 /* BREAK POINT */
 /* LAPTOP */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 992px) {
+    div#offcanvasExample {
+        transform: none;
+        visibility: visible !important;
+        top: var(--topNavbarHeight);
+        height: calc(100% - var(--topNavbarHeight));
+    }
 }
 
 /* TABLET */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 768px) and (max-width: 992px) {
 }
 
 /* MOBILE */
 @media only screen and (max-width: 767px) {
-  .form {
-    width: 375px;
-  }
+    .form {
+        width: 375px;
+    }
 }
 
 /* SMALL MOBILE */
 @media only screen and (max-width: 392px) {
-  .form {
-    width: 350px;
-  }
+    .form {
+        width: 350px;
+    }
 }
