@@ -28,8 +28,20 @@ div#offcanvasExample {
     width: var(--offcanvas-width);
 }
 
+.collapse-link .right-icon {
+    transition: 0.3s ease;
+}
+
 .collapse-link[aria-expanded="true"] .right-icon {
     transform: rotate(90deg);
+}
+
+.bg-diamond {
+    background: #20d7f7 url(../img/bg-diamond.jpg) no-repeat;
+}
+
+.bg-regular {
+    background: #c7b31c;
 }
 
 /* BREAK POINT */
@@ -40,6 +52,10 @@ div#offcanvasExample {
         visibility: visible !important;
         top: var(--topNavbarHeight);
         height: calc(100% - var(--topNavbarHeight));
+    }
+
+    main {
+        margin-left: var(--offcanvas-width);
     }
 }
 
