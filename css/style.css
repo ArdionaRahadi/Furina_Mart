@@ -28,6 +28,10 @@ div#offcanvasExample {
     width: var(--offcanvas-width);
 }
 
+.collapse-link[aria-expanded="true"] .right-icon {
+    transform: rotate(90deg);
+}
+
 /* BREAK POINT */
 /* LAPTOP */
 @media only screen and (min-width: 992px) {
