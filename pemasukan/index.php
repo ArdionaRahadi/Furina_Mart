@@ -64,7 +64,7 @@
                         <li class="px-2 pb-2">
                             <a
                                 class="text-white bg-danger rounded dropdown-item"
-                                href="#"
+                                href="../login/logout.php"
                                 >Log out</a
                             >
                         </li>
@@ -201,11 +201,11 @@
             <div class="container">
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <h2 class="fw-bold">Barang Masuk</h2>
+                        <h2 class="fw-bold">Data Barang Masuk</h2>
                     </div>
                 </div>
-                <div class="row mb-2">
-                    <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
                         <!-- Button trigger modal tambah -->
                         <button
                             type="button"
@@ -231,49 +231,103 @@
                         <!-- Button trigger modal hapus semua -->
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a
+                                        class="page-link"
+                                        href="#"
+                                        aria-label="Previous"
+                                    >
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a
+                                        class="page-link"
+                                        href="#"
+                                        aria-label="Next"
+                                    >
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <form class="d-flex justify-content-end" role="search">
+                            <input
+                                class="form-control me-2"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                            />
+                            <button
+                                class="btn btn-outline-success"
+                                type="submit"
+                            >
+                                Search
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive-md">
-                            <table class="table text-center table-striped">
-                                <tr>
-                                    <th>#</th>
-                                    <th>No Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Harga</th>
-                                    <th>Jumlah</th>
-                                    <th>Sub Total</th>
-                                    <th>Tanggal Masuk</th>
-                                    <th>Action</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>M98P7</td>
-                                    <td>Oreo</td>
-                                    <td>Rp. 5.000</td>
-                                    <td>50</td>
-                                    <td>Rp. 250.000</td>
-                                    <td>04-4-2024 15:00:00</td>
-                                    <td>
-                                        <div
-                                            class="action-group d-flex gap-2 justify-content-center align-items-center"
-                                        >
-                                            <span
-                                                class="btn btn-warning"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"
-                                                ><i
-                                                    class="bi bi-pencil-square"
-                                                ></i
-                                            ></span>
-                                            <span
-                                                class="btn btn-danger"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalHapus"
-                                                ><i class="bi bi-trash"></i
-                                            ></span>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <table
+                                class="table text-center table-striped"
+                                id="example"
+                            >
+                                <thead>
+                                    <tr class="table-primary">
+                                        <th>#</th>
+                                        <th>No Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Harga</th>
+                                        <th>Jumlah</th>
+                                        <th>Sub Total</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>M98P7</td>
+                                        <td>Oreo</td>
+                                        <td>Rp. 5.000</td>
+                                        <td>50</td>
+                                        <td>Rp. 250.000</td>
+                                        <td>04-4-2024 15:00:00</td>
+                                        <td>
+                                            <div
+                                                class="action-group d-flex gap-2 justify-content-center align-items-center"
+                                            >
+                                                <span
+                                                    class="btn btn-warning"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalEdit"
+                                                    ><i
+                                                        class="bi bi-pencil-square"
+                                                    ></i
+                                                ></span>
+                                                <span
+                                                    class="btn btn-danger"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalHapus"
+                                                    ><i class="bi bi-trash"></i
+                                                ></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -456,6 +510,7 @@
         </div>
         <!-- modal form hapus -->
 
+        <!-- Bootsrap JS -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
