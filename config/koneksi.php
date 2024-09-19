@@ -1,7 +1,7 @@
 <?php
-$serverName = "";
-$user = "";
-$userPassword = "";
-$databaseName = "";
+$serverName = "localhost";
+$user = "root";
+$userPassword = "root";
+$databaseName = "db_kasir";
 
-$koneksi = mysqli_query($serverName, $user, $userPassword, $userPassword);
+$koneksi = mysqli_connect($serverName, $user, $userPassword, $databaseName);

@@ -1,62 +1,67 @@
 :root {
-    --offcanvas-width: 270px;
-    --topNavbarHeight: 56px;
+  --offcanvas-width: 270px;
+  --topNavbarHeight: 56px;
 }
 
 .background-image {
-    height: 100vh;
-    background: url(../img/furina.jpeg) no-repeat;
-    background-size: cover;
+  height: 100vh;
+  background: url(../img/furina.jpeg) no-repeat;
+  background-size: cover;
 }
 
 .form {
-    width: 650px;
+  width: 650px;
 }
 
 .login {
-    width: 100%;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-        90deg,
-        rgba(2, 0, 36, 1) 0%,
-        rgba(15, 15, 175, 1) 34%,
-        rgba(0, 212, 255, 1) 82%
-    );
+  width: 100%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(15, 15, 175, 1) 34%,
+    rgba(0, 212, 255, 1) 82%
+  );
 }
 
 div#offcanvasExample {
-    width: var(--offcanvas-width);
+  width: var(--offcanvas-width);
 }
 
 .collapse-link .right-icon {
-    transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .collapse-link[aria-expanded="true"] .right-icon {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .bg-diamond {
-    background: #20d7f7 url(../img/bg-diamond.jpg) no-repeat;
+  background: #20d7f7 url(../img/bg-diamond.jpg) no-repeat;
 }
 
 .bg-regular {
-    background: #c7b31c;
+  background: #c7b31c;
+}
+
+.table-responsive-md {
+  height: 50% !important;
+  overflow: auto;
 }
 
 /* BREAK POINT */
 /* LAPTOP */
 @media only screen and (min-width: 992px) {
-    div#offcanvasExample {
-        transform: none;
-        visibility: visible !important;
-        top: var(--topNavbarHeight);
-        height: calc(100% - var(--topNavbarHeight));
-    }
+  div#offcanvasExample {
+    transform: none;
+    visibility: visible !important;
+    top: var(--topNavbarHeight);
+    height: calc(100% - var(--topNavbarHeight));
+  }
 
-    main {
-        margin-left: var(--offcanvas-width);
-    }
+  main {
+    margin-left: var(--offcanvas-width);
+  }
 }
 
 /* TABLET */
@@ -65,14 +70,14 @@ div#offcanvasExample {
 
 /* MOBILE */
 @media only screen and (max-width: 767px) {
-    .form {
-        width: 375px;
-    }
+  .form {
+    width: 375px;
+  }
 }
 
 /* SMALL MOBILE */
 @media only screen and (max-width: 392px) {
-    .form {
-        width: 350px;
-    }
+  .form {
+    width: 350px;
+  }
 }
