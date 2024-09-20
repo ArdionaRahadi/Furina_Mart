@@ -80,7 +80,7 @@ if(!isset($_SESSION["login"])){
                         <span>Transaksi</span>
                         <span class="right-icon ms-auto"><i class="bx bxs-chevron-right"></i></span>
                     </a>
-                    <div id="collapse-transaksi">
+                    <div class="collapse show" id="collapse-transaksi">
                         <div class="ps-4">
                             <ul class="navbar-nav">
                                 <li class="mb-2 mt-1">
