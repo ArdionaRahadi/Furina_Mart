@@ -3,7 +3,7 @@ session_start();
 include "../config/control.php";
 
 if(!isset($_SESSION["login"])){
-    header("location: login/");
+    header("location: ../login/");
 }
 
 $sqlSelect = select("SELECT * FROM t_barang_masuk");
@@ -269,8 +269,8 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                             <label for="floatingNamaBarang">Nama Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="hargaBarangMasuk" type="text" class="form-control" id="floatingHarga" placeholder="Harga"
-                                required />
+                            <input name="hargaBarangMasuk" type="text" class="form-control" id="floatingHarga"
+                                placeholder="Harga" required />
                             <label for="floatingHarga">Harga</label>
                         </div>
                         <div class="form-floating mb-3">
