@@ -1,9 +1,15 @@
-<?php 
+<?php
 session_start();
 include "config/control.php";
 
-if(!isset($_SESSION["login"])){
-    header("location: login/");
+if (!isset($_SESSION["login"])) {
+  header("location: login/");
+}
+
+$sqlSelect = select("SELECT * FROM t_barang_masuk");
+$totalBarang = 0;
+foreach ($sqlSelect as $data) {
+  $totalBarang += $data["jumlah_barang"];
 }
 ?>
 
@@ -44,7 +50,7 @@ if(!isset($_SESSION["login"])){
                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <i class="bi bi-person"></i>
-                    <span>Ardiona</span>
+                    <span><?= $_SESSION["login"] ?></span>
                 </a>
 
                 <ul class="bg-dark dropdown-menu dropdown-menu-end">
@@ -160,7 +166,7 @@ if(!isset($_SESSION["login"])){
                             <span>Total Barang</span>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title fw-bold">790</h1>
+                            <h1 class="card-title fw-bold"><?= $totalBarang ?></h1>
                         </div>
                     </div>
                 </div>

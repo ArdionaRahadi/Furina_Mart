@@ -47,7 +47,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <i class="bi bi-person"></i>
-                    <span>Ardiona</span>
+                    <span><?= $_SESSION["login"] ?></span>
                 </a>
 
                 <ul class="bg-dark dropdown-menu dropdown-menu-end">
@@ -259,29 +259,29 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                 <div class="modal-body">
                     <form method="post">
                         <div class="form-floating mb-3">
-                            <input name="no_barang" type="text" class="form-control" id="floatingNoBarang"
+                            <input name="noBarangMasuk" type="text" class="form-control" id="floatingNoBarang"
                                 placeholder="No Barang" required />
                             <label for="floatingNoBarang">No Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="nama_barang" type="text" class="form-control" id="floatingNamaBarang"
+                            <input name="namaBarangMasuk" type="text" class="form-control" id="floatingNamaBarang"
                                 placeholder="Nama Barang" required />
                             <label for="floatingNamaBarang">Nama Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="harga" type="text" class="form-control" id="floatingHarga" placeholder="Harga"
+                            <input name="hargaBarangMasuk" type="text" class="form-control" id="floatingHarga" placeholder="Harga"
                                 required />
                             <label for="floatingHarga">Harga</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="jumlah_barang" type="number" class="form-control" id="floatingJumlah"
+                            <input name="jumlahBarangMasuk" type="number" class="form-control" id="floatingJumlah"
                                 placeholder="Jumlah" required />
                             <label for="floatingJumlah">Jumlah</label>
                         </div>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button name="tambah" type="submit" class="btn btn-primary">
+                        <button name="tambahBarangMasuk" type="submit" class="btn btn-primary">
                             <span><i class="bi bi-floppy"></i></span>
                             <span>Save</span>
                         </button>

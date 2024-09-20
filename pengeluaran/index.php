@@ -1,3 +1,15 @@
+<?php
+session_start();
+include "../config/control.php";
+
+if (!isset($_SESSION["login"])) {
+  header("location: ../login/");
+}
+
+$sqlSelect = select("SELECT * FROM t_barang_keluar");
+?>
+
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -52,7 +64,7 @@
                         aria-expanded="false"
                     >
                         <i class="bi bi-person"></i>
-                        <span>Ardiona</span>
+                        <span><?= $_SESSION["login"] ?></span>
                     </a>
 
                     <ul class="bg-dark dropdown-menu dropdown-menu-end">
@@ -293,14 +305,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($sqlSelect as $data): ?>
+                                    <?php $subTotal =
+                                      $data["harga"] *
+                                      $data["jumlah_barang"]; ?>
                                     <tr>
-                                        <td>1</td>
-                                        <td>M98P7</td>
-                                        <td>Oreo</td>
-                                        <td>Rp. 5.000</td>
-                                        <td>50</td>
-                                        <td>Rp. 250.000</td>
-                                        <td>04-4-2024 15:00:00</td>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= $data["no_barang"] ?></td>
+                                        <td><?= $data["nama_barang"] ?></td>
+                                        <td>Rp. <?= number_format(
+                                          $data["harga"],
+                                          0,
+                                          ",",
+                                          "."
+                                        ) ?></td>
+                                        <td><?= $data["jumlah_barang"] ?></td>
+                                        <td>Rp. <?= number_format(
+                                          $subTotal,
+                                          0,
+                                          ",",
+                                          "."
+                                        ) ?></td>
+                                        <td><?= $data["tanggal_keluar"] ?></td>
                                         <td>
                                             <div
                                                 class="action-group d-flex gap-2 justify-content-center align-items-center"
@@ -322,6 +349,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -347,40 +375,45 @@
                         <form method="post">
                             <div class="form-floating mb-3">
                                 <input
+                                    name="noBarangKeluar"
                                     type="text"
                                     class="form-control"
                                     id="floatingNoBarang"
                                     placeholder="No Barang"
+                                    required
                                 />
                                 <label for="floatingNoBarang">No Barang</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input
+                                    name="namaBarangKeluar"
                                     type="text"
                                     class="form-control"
                                     id="floatingNamaBarang"
                                     placeholder="Nama Barang"
-                                />
+                               required />
                                 <label for="floatingNamaBarang"
                                     >Nama Barang</label
                                 >
                             </div>
                             <div class="form-floating mb-3">
                                 <input
+                                    name="hargaBarangKeluar"
                                     type="text"
                                     class="form-control"
                                     id="floatingHarga"
                                     placeholder="Harga"
-                                />
+                               required />
                                 <label for="floatingHarga">Harga</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input
+                                    name="jumlahBarangKeluar"
                                     type="number"
                                     class="form-control"
                                     id="floatingJumlah"
                                     placeholder="Jumlah"
-                                />
+                               required />
                                 <label for="floatingJumlah">Jumlah</label>
                             </div>
                             <button
@@ -390,7 +423,7 @@
                             >
                                 Close
                             </button>
-                            <button type="submit" class="btn btn-primary">
+                            <button name="tambahBarangKeluar" type="submit" class="btn btn-primary">
                                 <span><i class="bi bi-floppy"></i></span>
                                 <span>Save</span>
                             </button>
@@ -504,11 +537,15 @@
             </div>
         </div>
         <!-- modal form hapus -->
-
+        
+        <!-- Bootstrap JS -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"
         ></script>
+        
+        <!-- SweetAlert2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 </html>
