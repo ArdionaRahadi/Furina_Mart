@@ -28,6 +28,9 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
     <!-- Boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.bootstrap5.css">
+
     <!-- My CSS -->
     <link rel="stylesheet" href="../css/style.css" />
 </head>
@@ -174,39 +177,9 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
             </div>
 
             <div class="row">
-                <div class="col-md-8">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <form class="d-flex justify-content-end" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-success" type="submit">
-                            Search
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive-md">
-                        <table class="table text-center table-striped" id="example">
+                        <table class="table table-striped" id="table">
                             <thead>
                                 <tr class="table-primary">
                                     <th>#</th>
@@ -235,9 +208,10 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                                         <div
                                             class="action-group d-flex gap-2 justify-content-center align-items-center">
                                             <span class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"><i class="bi bi-pencil-square"></i></span>
+                                                data-bs-target="#modalEdit<?= $i ?>"><i
+                                                    class="bi bi-pencil-square"></i></span>
                                             <span class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#modalHapus"><i class="bi bi-trash"></i></span>
+                                                data-bs-target="#modalHapus<?= $i ?>"><i class="bi bi-trash"></i></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -293,32 +267,40 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
     <!-- modal form tambah -->
 
     <!-- Modal form edit -->
-    <div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <?php $i = 1 ?>
+    <?php foreach($sqlSelect as $data) : ?>
+    <?php $i++ ?>
+    <div class="modal fade" id="modalEdit<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     <form method="post">
+                        <input type="hidden" value="<?= $data["id"] ?>">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingNoBarang" placeholder="No Barang" />
+                            <input value="<?= $data["no_barang"] ?>" name="editNoBarangMasuk" type="text"
+                                class="form-control" id="floatingNoBarang" placeholder="No Barang" />
                             <label for="floatingNoBarang">No Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingNamaBarang" placeholder="Nama Barang" />
+                            <input value="<?= $data["nama_barang"] ?>" name="editNamaBarangMasuk" type="text"
+                                class="form-control" id="floatingNamaBarang" placeholder="Nama Barang" />
                             <label for="floatingNamaBarang">Nama Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingHarga" placeholder="Harga" />
+                            <input value="<?= $data["harga"] ?>" name="editHargaBarangMasuk" type="text"
+                                class="form-control" id="floatingHarga" placeholder="Harga" />
                             <label for="floatingHarga">Harga</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control" id="floatingJumlah" placeholder="Jumlah" />
+                            <input value="<?= $data["jumlah_barang"] ?>" name="editJumlahBarangMasuk" type="number"
+                                class="form-control" id="floatingJumlah" placeholder="Jumlah" />
                             <label for="floatingJumlah">Jumlah</label>
                         </div>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button name="editBarangMasuk" type="submit" class="btn btn-primary">
                             <span><i class="bi bi-floppy"></i></span>
                             <span>Save</span>
                         </button>
@@ -327,10 +309,14 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
             </div>
         </div>
     </div>
+    <?php endforeach ?>
     <!-- modal form edit -->
 
     <!-- Modal form hapus -->
-    <div class="modal fade" id="modalHapus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <?php $i = 1 ?>
+    <?php foreach($sqlSelect as $data) : ?>
+    <?php $i++ ?>
+    <div class="modal fade" id="modalHapus<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -339,6 +325,22 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                 </div>
                 <div class="modal-body">
                     <form method="post">
+                        <ul class="navbar-nav mb-3">
+                            <li>
+                                <p class="fw-bold fs-5  text-danger">No Barang: <?= $data["no_barang"] ?></p>
+                            </li>
+                            <li>
+                                <p class="fw-bold fs-5 text-danger">Nama Barang: <?= $data["nama_barang"] ?></p>
+                            </li>
+                            <li>
+                                <p class="fw-bold fs-5 text-danger">Harga: Rp.
+                                    <?= number_format($data["harga"],0,",",".") ?></p>
+                            </li>
+                            <li>
+                                <p class="fw-bold fs-5 text-danger">Stock: <?= $data["jumlah_barang"] ?></p>
+                            </li>
+                        </ul>
+
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             No
                         </button>
@@ -350,6 +352,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
             </div>
         </div>
     </div>
+    <?php endforeach ?>
     <!-- modal form hapus -->
 
     <!-- Bootsrap JS -->
@@ -359,6 +362,23 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
+
+    <!-- My Script -->
+    <script>
+    new DataTable('#table', {
+        ordering: false
+    });
+
+    // Disabel Confirm Resubmition
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
 </body>
 
 </html>

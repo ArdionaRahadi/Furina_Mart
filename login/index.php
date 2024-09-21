@@ -57,58 +57,63 @@ if(isset($_POST["login"])){
 </head>
 
 <body>
-    <div class="background-image position-relative">
+    <div class="background-image">
         <div class="container">
-            <form autocomplete="off" method="post" style="background-color: rgba(238, 238, 238, 0.8)"
-                class="rounded-4 p-4 position-absolute top-50 start-50 translate-middle form">
-                <h1 class="mb-5 text-center fw-bold">LOGIN</h1>
-                <!-- Pesan Jika Inputan Kosong -->
-                <?php if(isset($error)) : ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Semua Inputan Wajib Di isi</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php endif ?>
-                <!-- Pesan Jika Inputan Kosong -->
+            <div style="height: 100vh;" class="row justify-content-center align-items-center">
+                <div class="col-lg-6">
+                    <form autocomplete="off" method="post" style="background: #fff;" class="rounded-4 p-4 form">
+                        <h1 class="mb-5 text-center fw-bold">LOGIN</h1>
+                        <!-- Pesan Jika Inputan Kosong -->
+                        <?php if(isset($error)) : ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Semua Inputan Wajib Di isi</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php endif ?>
+                        <!-- Pesan Jika Inputan Kosong -->
 
-                <!-- Pesan Jika Username Tidak Ada -->
-                <?php if(isset($errorUsername)) : ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Username Tidak Terdaftar</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php endif ?>
-                <!-- Pesan Jika Username Tidak Ada -->
+                        <!-- Pesan Jika Username Tidak Ada -->
+                        <?php if(isset($errorUsername)) : ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Username Tidak Terdaftar</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php endif ?>
+                        <!-- Pesan Jika Username Tidak Ada -->
 
-                <!-- Pesan Jika Password Salah -->
-                <?php if(isset($errorPassword)) : ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Password Salah</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php endif ?>
-                <!-- Pesan Jika Password Salah -->
+                        <!-- Pesan Jika Password Salah -->
+                        <?php if(isset($errorPassword)) : ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Password Salah</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php endif ?>
+                        <!-- Pesan Jika Password Salah -->
 
-                <div class="mb-4">
-                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input name="username" type="text" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" required />
+                        <div class="mb-4">
+                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <input name="username" type="text" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" required />
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <input name="password" type="password" class="form-control password" id="password"
+                                required />
+                        </div>
+                        <div class="mb-4 form-check">
+                            <input style="cursor: pointer" type="checkbox" class="form-check-input" id="show-pw" />
+                            <label style="cursor: pointer" class="form-check-label" for="show-pw">Show Password</label>
+                        </div>
+                        <button name="login" type="submit" class="btn btn-primary fw-bold mb-3 login">
+                            Log in
+                        </button>
+                        <a class="text-center text-black text-decoration-none" href="">
+                            <p>Forgot Password?</p>
+                        </a>
+                    </form>
                 </div>
-                <div class="mb-4">
-                    <label for="password" class="form-label">Password</label>
-                    <input name="password" type="password" class="form-control password" id="password" required />
-                </div>
-                <div class="mb-4 form-check">
-                    <input style="cursor: pointer" type="checkbox" class="form-check-input" id="show-pw" />
-                    <label style="cursor: pointer" class="form-check-label" for="show-pw">Show Password</label>
-                </div>
-                <button name="login" type="submit" class="btn btn-primary fw-bold mb-3 login">
-                    Log in
-                </button>
-                <a class="text-center text-black text-decoration-none" href="">
-                    <p>Forgot Password?</p>
-                </a>
-            </form>
+            </div>
+
         </div>
     </div>
 

@@ -42,21 +42,18 @@ if (isset($_POST["tambahBarangMasuk"])) {
     echo "<script>
                 setTimeout(function(){
                     Swal.fire({
-                        title: \"ERROR\",
-                        text: \"Inputan Tidak Boleh Kosong\",
-                        icon: \"error\",
-                        showConfirmButton: false
+                        title: 'ERROR',
+                        text: 'Inputan Tidak Boleh Kosong',
+                        icon: 'error',
+                        allowOutsideClick: false
                     })
                 },100)
-                setTimeout(function(){
-                    location.replace(\"index.php\");
-                },1500)
               </script>";
   } else {
     $queryInsert = "INSERT INTO t_barang_masuk VALUES (
                             NULL,
-                            \"$noBarangMasuk\",
-                            \"$namaBarangMasuk\",
+                            '$noBarangMasuk',
+                            '$namaBarangMasuk',
                               $hargaBarangMasuk,
                               $jumlahBarangMasuk,
                               NOW()
@@ -66,15 +63,12 @@ if (isset($_POST["tambahBarangMasuk"])) {
     echo "<script>
                 setTimeout(function(){
                     Swal.fire({
-                        title: \"SUCCESS\",
-                        text: \"Data Berhasil Di Tambahkan\",
-                        icon: \"success\",
-                        showConfirmButton: false
+                        title: 'SUCCESS',
+                        text: 'Data Berhasil Di Tambahkan',
+                        icon: 'success',
+                        allowOutsideClick: false
                     })
                 },100)
-                setTimeout(function(){
-                    location.replace(\"index.php\");
-                },2000)
               </script>";
   }
 }
