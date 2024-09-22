@@ -79,9 +79,8 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                     </a>
                 </li>
                 <li class="px-2 mb-1">
-                    <a onclick="myfunction()" class="p-2 nav-link d-flex align-items-center collapse-link"
-                        data-bs-toggle="collapse" href="#collapse-transaksi" role="button" aria-expanded="false"
-                        aria-controls="collapseExample">
+                    <a class="p-2 nav-link d-flex align-items-center collapse-link" data-bs-toggle="collapse"
+                        href="#collapse-transaksi" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <span><i class="me-3 bx bxs-pie-chart-alt-2"></i></span>
                         <span>Transaksi</span>
                         <span class="right-icon ms-auto"><i class="bx bxs-chevron-right"></i></span>
@@ -90,7 +89,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                         <div class="ps-4">
                             <ul class="navbar-nav">
                                 <li class="mb-2 mt-1">
-                                    <a href="" class="px-2 nav-link">
+                                    <a href="../kasir/" class="px-2 nav-link">
                                         <span><i class="bi bi-cart pe-3"></i></span>
                                         <span>Kasir</span>
                                     </a>
@@ -183,7 +182,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                             <thead>
                                 <tr class="table-primary">
                                     <th>#</th>
-                                    <th>No Barang</th>
+                                    <th>Barcode</th>
                                     <th>Nama Barang</th>
                                     <th>Harga</th>
                                     <th>Jumlah</th>
@@ -198,7 +197,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                                 <?php $subTotal = $data["harga"] * $data["jumlah_barang"] ?>
                                 <tr>
                                     <td><?= $i++ ?></td>
-                                    <td><?= $data["no_barang"] ?></td>
+                                    <td><?= $data["barcode"] ?></td>
                                     <td><?= $data["nama_barang"] ?></td>
                                     <td>Rp. <?= number_format($data["harga"],0,",",".") ?></td>
                                     <td><?= $data["jumlah_barang"] ?></td>
@@ -233,9 +232,9 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                 <div class="modal-body">
                     <form method="post">
                         <div class="form-floating mb-3">
-                            <input name="noBarangMasuk" type="text" class="form-control" id="floatingNoBarang"
+                            <input name="barcodeBarangMasuk" type="number" class="form-control" id="floatingNoBarang"
                                 placeholder="No Barang" required />
-                            <label for="floatingNoBarang">No Barang</label>
+                            <label for="floatingNoBarang">Barcode</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input name="namaBarangMasuk" type="text" class="form-control" id="floatingNamaBarang"
@@ -243,7 +242,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                             <label for="floatingNamaBarang">Nama Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="hargaBarangMasuk" type="text" class="form-control" id="floatingHarga"
+                            <input name="hargaBarangMasuk" type="number" class="form-control" id="floatingHarga"
                                 placeholder="Harga" required />
                             <label for="floatingHarga">Harga</label>
                         </div>
@@ -276,11 +275,11 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
             <div class="modal-content">
                 <div class="modal-body">
                     <form method="post">
-                        <input type="hidden" value="<?= $data["id"] ?>">
+                        <input name="id" type="hidden" value="<?= $data["id"] ?>">
                         <div class="form-floating mb-3">
-                            <input value="<?= $data["no_barang"] ?>" name="editNoBarangMasuk" type="text"
+                            <input value="<?= $data["barcode"] ?>" name="editBarcodeBarangMasuk" type="text"
                                 class="form-control" id="floatingNoBarang" placeholder="No Barang" />
-                            <label for="floatingNoBarang">No Barang</label>
+                            <label for="floatingNoBarang">Barcode</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input value="<?= $data["nama_barang"] ?>" name="editNamaBarangMasuk" type="text"
@@ -325,9 +324,10 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                 </div>
                 <div class="modal-body">
                     <form method="post">
+                        <input name="id" type="hidden" value="<?= $data["id"] ?>">
                         <ul class="navbar-nav mb-3">
                             <li>
-                                <p class="fw-bold fs-5  text-danger">No Barang: <?= $data["no_barang"] ?></p>
+                                <p class="fw-bold fs-5  text-danger">No Barang: <?= $data["barcode"] ?></p>
                             </li>
                             <li>
                                 <p class="fw-bold fs-5 text-danger">Nama Barang: <?= $data["nama_barang"] ?></p>
@@ -344,7 +344,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             No
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button name="hapus" type="submit" class="btn btn-primary">
                             <span>Yes</span>
                         </button>
                     </form>

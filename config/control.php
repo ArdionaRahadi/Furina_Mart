@@ -14,9 +14,9 @@ function select($querySelect)
 }
 
 if (isset($_POST["tambahBarangMasuk"])) {
-  $noBarangMasuk = mysqli_real_escape_string(
+  $barcodeBarangMasuk = mysqli_real_escape_string(
     $koneksi,
-    htmlspecialchars(strtoupper($_POST["noBarangMasuk"]))
+    htmlspecialchars($_POST["barcodeBarangMasuk"])
   );
   $namaBarangMasuk = mysqli_real_escape_string(
     $koneksi,
@@ -31,10 +31,8 @@ if (isset($_POST["tambahBarangMasuk"])) {
     htmlspecialchars($_POST["jumlahBarangMasuk"])
   );
 
-  // var_dump("ok");
-
   if (
-    $noBarangMasuk === "" ||
+    $barcodeBarangMasuk === "" ||
     $namaBarangMasuk === "" ||
     $hargaBarangMasuk === "" ||
     $jumlahBarangMasuk === ""
@@ -52,20 +50,109 @@ if (isset($_POST["tambahBarangMasuk"])) {
   } else {
     $queryInsert = "INSERT INTO t_barang_masuk VALUES (
                             NULL,
-                            '$noBarangMasuk',
+                            $barcodeBarangMasuk,
                             '$namaBarangMasuk',
                               $hargaBarangMasuk,
                               $jumlahBarangMasuk,
                               NOW()
                         )";
-    $sqlInsert = mysqli_query($koneksi, $queryInsert);
+    if(mysqli_query($koneksi, $queryInsert)){
+        echo "<script>
+                setTimeout(function(){
+                  Swal.fire({
+                    title: 'SUCCESS',
+                    text: 'Data Berhasil Di Tambahkan',
+                    icon: 'success',
+                    allowOutsideClick: false
+                  })
+                },100)
+              </script>";
+    } else {
+      echo "<script>
+              setTimeout(function(){
+                  Swal.fire({
+                    title: 'SUCCESS',
+                    text: 'Data Berhasil Di Tambahkan',
+                    icon: 'success',
+                    allowOutsideClick: false
+                  })
+              },100)
+            </script>";
+    }
+  }
+}
 
+// edit barang
+if(isset($_POST["editBarangMasuk"])){
+  $id = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["id"]));
+  $barcode = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["editBarcodeBarangMasuk"]));
+  $namaBarang = mysqli_real_escape_string($koneksi, htmlspecialchars(ucwords($_POST["editNamaBarangMasuk"])));
+  $harga = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["editHargaBarangMasuk"]));
+  $jumlahBarang = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["editJumlahBarangMasuk"]));
+
+  if($barcode === "" || $namaBarang === "" || $harga === "" || $jumlahBarang === ""){
     echo "<script>
                 setTimeout(function(){
                     Swal.fire({
+                        title: 'ERROR',
+                        text: 'Inputan Tidak Boleh Kosong',
+                        icon: 'error',
+                        allowOutsideClick: false
+                    })
+                },100)
+              </script>";
+  } else {
+    $queryUpdate = "UPDATE t_barang_masuk SET barcode = $barcode, nama_barang = '$namaBarang', harga = $harga, jumlah_barang = $jumlahBarang WHERE id = $id";
+    if(mysqli_query($koneksi, $queryUpdate)) {
+
+        echo "<script>
+                setTimeout(function(){
+                    Swal.fire({
                         title: 'SUCCESS',
-                        text: 'Data Berhasil Di Tambahkan',
+                        text: 'Data Berhasil Di Perbarui',
                         icon: 'success',
+                        allowOutsideClick: false
+                    })
+                },100)
+              </script>";
+    } else {
+        echo "<script>
+                setTimeout(function(){
+                    Swal.fire({
+                        title: 'ERROR',
+                        text: 'Data Gagal Di Perbarui',
+                        icon: 'error',
+                        allowOutsideClick: false
+                    })
+                },100)
+              </script>";
+    }
+  }
+}
+
+// hapus barang
+if(isset($_POST{"hapus"})){
+  $id = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["id"]));
+
+  $queryDelete = "DELETE FROM t_barang_masuk WHERE id = '$id'";
+  if(mysqli_query($koneksi, $queryDelete)) {
+        echo "<script>
+                setTimeout(function(){
+                    Swal.fire({
+                        title: 'SUCCESS',
+                        text: 'Data Berhasil Di Hapus',
+                        icon: 'success',
+                        allowOutsideClick: false
+                    })
+                },100)
+              </script>";
+  } else {
+        echo "<script>
+                setTimeout(function(){
+                    Swal.fire({
+                        title: 'ERROR',
+                        text: 'Data Gagal Di Hapus',
+                        icon: 'error',
                         allowOutsideClick: false
                     })
                 },100)
