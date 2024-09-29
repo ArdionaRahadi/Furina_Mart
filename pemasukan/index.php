@@ -2,12 +2,11 @@
 session_start();
 include "../config/control.php";
 
-if(!isset($_SESSION["login"])){
-    header("location: ../login/");
+if (!isset($_SESSION["login"])) {
+  header("location: ../login/");
 }
 
 $sqlSelect = select("SELECT * FROM t_barang_masuk");
-
 ?>
 
 <!doctype html>
@@ -192,16 +191,27 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1 ?>
-                                <?php foreach($sqlSelect as $data) : ?>
-                                <?php $subTotal = $data["harga"] * $data["jumlah_barang"] ?>
+                                <?php $i = 1; ?>
+                                <?php foreach ($sqlSelect as $data): ?>
+                                <?php $subTotal =
+                                  $data["harga"] * $data["jumlah_barang"]; ?>
                                 <tr>
                                     <td><?= $i++ ?></td>
                                     <td><?= $data["barcode"] ?></td>
                                     <td><?= $data["nama_barang"] ?></td>
-                                    <td>Rp. <?= number_format($data["harga"],0,",",".") ?></td>
+                                    <td>Rp. <?= number_format(
+                                      $data["harga"],
+                                      0,
+                                      ",",
+                                      "."
+                                    ) ?></td>
                                     <td><?= $data["jumlah_barang"] ?></td>
-                                    <td>Rp. <?= number_format($subTotal,0,",",".") ?></td>
+                                    <td>Rp. <?= number_format(
+                                      $subTotal,
+                                      0,
+                                      ",",
+                                      "."
+                                    ) ?></td>
                                     <td><?= $data["tanggal_masuk"] ?></td>
                                     <td>
                                         <div
@@ -214,7 +224,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                                         </div>
                                     </td>
                                 </tr>
-                                <?php endforeach ?>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -232,29 +242,29 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                 <div class="modal-body">
                     <form method="post">
                         <div class="form-floating mb-3">
-                            <input name="barcodeBarangMasuk" type="number" class="form-control" id="floatingNoBarang"
+                            <input name="barcode" type="number" class="form-control" id="floatingNoBarang"
                                 placeholder="No Barang" required />
                             <label for="floatingNoBarang">Barcode</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="namaBarangMasuk" type="text" class="form-control" id="floatingNamaBarang"
+                            <input name="nama_barang" type="text" class="form-control" id="floatingNamaBarang"
                                 placeholder="Nama Barang" required />
                             <label for="floatingNamaBarang">Nama Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="hargaBarangMasuk" type="number" class="form-control" id="floatingHarga"
+                            <input name="harga_barang" type="number" class="form-control" id="floatingHarga"
                                 placeholder="Harga" required />
                             <label for="floatingHarga">Harga</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="jumlahBarangMasuk" type="number" class="form-control" id="floatingJumlah"
+                            <input name="jumlah_barang" type="number" class="form-control" id="floatingJumlah"
                                 placeholder="Jumlah" required />
                             <label for="floatingJumlah">Jumlah</label>
                         </div>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button name="tambahBarangMasuk" type="submit" class="btn btn-primary">
+                        <button name="tambah_barang_masuk" type="submit" class="btn btn-primary">
                             <span><i class="bi bi-floppy"></i></span>
                             <span>Save</span>
                         </button>
@@ -266,40 +276,50 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
     <!-- modal form tambah -->
 
     <!-- Modal form edit -->
-    <?php $i = 1 ?>
-    <?php foreach($sqlSelect as $data) : ?>
-    <?php $i++ ?>
+    <?php $i = 1; ?>
+    <?php foreach ($sqlSelect as $data): ?>
+    <?php $i++; ?>
     <div class="modal fade" id="modalEdit<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     <form method="post">
-                        <input name="id" type="hidden" value="<?= $data["id"] ?>">
+                        <input name="id_barang" type="hidden" value="<?= $data[
+                          "id"
+                        ] ?>">
                         <div class="form-floating mb-3">
-                            <input value="<?= $data["barcode"] ?>" name="editBarcodeBarangMasuk" type="text"
+                            <input value="<?= $data[
+                              "barcode"
+                            ] ?>" name="barcode" type="number"
                                 class="form-control" id="floatingNoBarang" placeholder="No Barang" />
                             <label for="floatingNoBarang">Barcode</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input value="<?= $data["nama_barang"] ?>" name="editNamaBarangMasuk" type="text"
+                            <input value="<?= $data[
+                              "nama_barang"
+                            ] ?>" name="nama_barang" type="text"
                                 class="form-control" id="floatingNamaBarang" placeholder="Nama Barang" />
                             <label for="floatingNamaBarang">Nama Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input value="<?= $data["harga"] ?>" name="editHargaBarangMasuk" type="text"
+                            <input value="<?= $data[
+                              "harga"
+                            ] ?>" name="harga_barang" type="text"
                                 class="form-control" id="floatingHarga" placeholder="Harga" />
                             <label for="floatingHarga">Harga</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input value="<?= $data["jumlah_barang"] ?>" name="editJumlahBarangMasuk" type="number"
+                            <input value="<?= $data[
+                              "jumlah_barang"
+                            ] ?>" name="jumlah_barang" type="number"
                                 class="form-control" id="floatingJumlah" placeholder="Jumlah" />
                             <label for="floatingJumlah">Jumlah</label>
                         </div>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button name="editBarangMasuk" type="submit" class="btn btn-primary">
+                        <button name="edit_barang_masuk" type="submit" class="btn btn-primary">
                             <span><i class="bi bi-floppy"></i></span>
                             <span>Save</span>
                         </button>
@@ -308,13 +328,13 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
             </div>
         </div>
     </div>
-    <?php endforeach ?>
+    <?php endforeach; ?>
     <!-- modal form edit -->
 
     <!-- Modal form hapus -->
-    <?php $i = 1 ?>
-    <?php foreach($sqlSelect as $data) : ?>
-    <?php $i++ ?>
+    <?php $i = 1; ?>
+    <?php foreach ($sqlSelect as $data): ?>
+    <?php $i++; ?>
     <div class="modal fade" id="modalHapus<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -324,27 +344,40 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                 </div>
                 <div class="modal-body">
                     <form method="post">
-                        <input name="id" type="hidden" value="<?= $data["id"] ?>">
+                        <input name="id_barang" type="hidden" value="<?= $data[
+                          "id"
+                        ] ?>">
                         <ul class="navbar-nav mb-3">
                             <li>
-                                <p class="fw-bold fs-5  text-danger">No Barang: <?= $data["barcode"] ?></p>
+                                <p class="fw-bold fs-5  text-danger">Barcode: <?= $data[
+                                  "barcode"
+                                ] ?></p>
                             </li>
                             <li>
-                                <p class="fw-bold fs-5 text-danger">Nama Barang: <?= $data["nama_barang"] ?></p>
+                                <p class="fw-bold fs-5 text-danger">Nama Barang: <?= $data[
+                                  "nama_barang"
+                                ] ?></p>
                             </li>
                             <li>
                                 <p class="fw-bold fs-5 text-danger">Harga: Rp.
-                                    <?= number_format($data["harga"],0,",",".") ?></p>
+                                    <?= number_format(
+                                      $data["harga"],
+                                      0,
+                                      ",",
+                                      "."
+                                    ) ?></p>
                             </li>
                             <li>
-                                <p class="fw-bold fs-5 text-danger">Stock: <?= $data["jumlah_barang"] ?></p>
+                                <p class="fw-bold fs-5 text-danger">Jumlah: <?= $data[
+                                  "jumlah_barang"
+                                ] ?></p>
                             </li>
                         </ul>
 
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             No
                         </button>
-                        <button name="hapus" type="submit" class="btn btn-primary">
+                        <button name="hapus_barang_masuk" type="submit" class="btn btn-primary">
                             <span>Yes</span>
                         </button>
                     </form>
@@ -352,7 +385,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
             </div>
         </div>
     </div>
-    <?php endforeach ?>
+    <?php endforeach; ?>
     <!-- modal form hapus -->
 
     <!-- Bootsrap JS -->

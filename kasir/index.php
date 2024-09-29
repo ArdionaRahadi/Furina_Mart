@@ -2,10 +2,9 @@
 session_start();
 include "../config/control.php";
 
-if(!isset($_SESSION["login"])){
-    header("location: ../login/");
+if (!isset($_SESSION["login"])) {
+  header("location: ../login/");
 }
-
 ?>
 
 <!doctype html>
@@ -14,7 +13,7 @@ if(!isset($_SESSION["login"])){
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pemasukan</title>
+    <title>Kasir</title>
 
     <!-- Bootsrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -74,7 +73,7 @@ if(!isset($_SESSION["login"])){
                     </a>
                 </li>
                 <li class="px-2 mb-1">
-                    <a class="p-2 nav-link d-flex align-items-center collapse-link" data-bs-toggle="collapse"
+                    <a class="p-2 bg-primary rounded nav-link d-flex align-items-center collapse-link" data-bs-toggle="collapse"
                         href="#collapse-transaksi" role="button" aria-expanded="true" aria-controls="collapseExample">
                         <span><i class="me-3 bx bxs-pie-chart-alt-2"></i></span>
                         <span>Transaksi</span>
@@ -84,7 +83,7 @@ if(!isset($_SESSION["login"])){
                         <div class="ps-4">
                             <ul class="navbar-nav">
                                 <li class="mb-2 mt-1">
-                                    <a href="" class="px-2 text-warning nav-link">
+                                    <a href="" class="px-2 text-success nav-link">
                                         <span><i class="bi bi-cart pe-3"></i></span>
                                         <span>Kasir</span>
                                     </a>
@@ -151,6 +150,40 @@ if(!isset($_SESSION["login"])){
                 <div class="col-md-12">
                     <h2 class="fw-bold">Kasir</h2>
                 </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="table-responsive">
+                  <table class="table table-stripped">
+                    <thead>
+                      <tr class="table-primary">
+                        <th>No</th>
+                        <th>Barcode</th>
+                        <th>Nama Barang</th>
+                        <th>Harga</th>
+                        <th>Qty</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>087543678</td>
+                        <td>Amplang</td>
+                        <td>Rp. 12.500</td>
+                        <td>1</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
         </div>
     </main>

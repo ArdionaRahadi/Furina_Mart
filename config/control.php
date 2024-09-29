@@ -13,29 +13,30 @@ function select($querySelect)
   return $result;
 }
 
-if (isset($_POST["tambahBarangMasuk"])) {
-  $barcodeBarangMasuk = mysqli_real_escape_string(
+// Tambah
+if (isset($_POST["tambah_barang_masuk"])) {
+  $barcode = mysqli_real_escape_string(
     $koneksi,
-    htmlspecialchars($_POST["barcodeBarangMasuk"])
+    htmlspecialchars($_POST["barcode"])
   );
-  $namaBarangMasuk = mysqli_real_escape_string(
+  $namaBarang = mysqli_real_escape_string(
     $koneksi,
-    htmlspecialchars(ucwords($_POST["namaBarangMasuk"]))
+    htmlspecialchars(ucwords($_POST["nama_barang"]))
   );
-  $hargaBarangMasuk = mysqli_real_escape_string(
+  $hargaBarang = mysqli_real_escape_string(
     $koneksi,
-    htmlspecialchars($_POST["hargaBarangMasuk"])
+    htmlspecialchars($_POST["harga_barang"])
   );
-  $jumlahBarangMasuk = mysqli_real_escape_string(
+  $jumlahBarang = mysqli_real_escape_string(
     $koneksi,
-    htmlspecialchars($_POST["jumlahBarangMasuk"])
+    htmlspecialchars($_POST["jumlah_barang"])
   );
 
   if (
-    $barcodeBarangMasuk === "" ||
-    $namaBarangMasuk === "" ||
-    $hargaBarangMasuk === "" ||
-    $jumlahBarangMasuk === ""
+    $barcode === "" ||
+    $namaBarang === "" ||
+    $hargaBarang === "" ||
+    $jumlahBarang === ""
   ) {
     echo "<script>
                 setTimeout(function(){
@@ -50,14 +51,14 @@ if (isset($_POST["tambahBarangMasuk"])) {
   } else {
     $queryInsert = "INSERT INTO t_barang_masuk VALUES (
                             NULL,
-                            $barcodeBarangMasuk,
-                            '$namaBarangMasuk',
-                              $hargaBarangMasuk,
-                              $jumlahBarangMasuk,
-                              NOW()
+                            '$barcode',
+                           '$namaBarang',
+                            $hargaBarang,
+                            $jumlahBarang,
+                            NOW()
                         )";
-    if(mysqli_query($koneksi, $queryInsert)){
-        echo "<script>
+    if (mysqli_query($koneksi, $queryInsert)) {
+      echo "<script>
                 setTimeout(function(){
                   Swal.fire({
                     title: 'SUCCESS',
@@ -83,14 +84,34 @@ if (isset($_POST["tambahBarangMasuk"])) {
 }
 
 // edit barang
-if(isset($_POST["editBarangMasuk"])){
-  $id = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["id"]));
-  $barcode = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["editBarcodeBarangMasuk"]));
-  $namaBarang = mysqli_real_escape_string($koneksi, htmlspecialchars(ucwords($_POST["editNamaBarangMasuk"])));
-  $harga = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["editHargaBarangMasuk"]));
-  $jumlahBarang = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["editJumlahBarangMasuk"]));
+if (isset($_POST["edit_barang_masuk"])) {
+  $idBarang = mysqli_real_escape_string(
+    $koneksi,
+    htmlspecialchars($_POST["id_barang"])
+  );
+  $barcode = mysqli_real_escape_string(
+    $koneksi,
+    htmlspecialchars($_POST["barcode"])
+  );
+  $namaBarang = mysqli_real_escape_string(
+    $koneksi,
+    htmlspecialchars(ucwords($_POST["nama_barang"]))
+  );
+  $hargaBarang = mysqli_real_escape_string(
+    $koneksi,
+    htmlspecialchars($_POST["harga_barang"])
+  );
+  $jumlahBarang = mysqli_real_escape_string(
+    $koneksi,
+    htmlspecialchars($_POST["jumlah_barang"])
+  );
 
-  if($barcode === "" || $namaBarang === "" || $harga === "" || $jumlahBarang === ""){
+  if (
+    $barcode === "" ||
+    $namaBarang === "" ||
+    $hargaBarang === "" ||
+    $jumlahBarang === ""
+  ) {
     echo "<script>
                 setTimeout(function(){
                     Swal.fire({
@@ -102,10 +123,9 @@ if(isset($_POST["editBarangMasuk"])){
                 },100)
               </script>";
   } else {
-    $queryUpdate = "UPDATE t_barang_masuk SET barcode = $barcode, nama_barang = '$namaBarang', harga = $harga, jumlah_barang = $jumlahBarang WHERE id = $id";
-    if(mysqli_query($koneksi, $queryUpdate)) {
-
-        echo "<script>
+    $queryUpdate = "UPDATE t_barang_masuk SET barcode = '$barcode', nama_barang = '$namaBarang', harga = $hargaBarang, jumlah_barang = $jumlahBarang WHERE id = $idBarang";
+    if (mysqli_query($koneksi, $queryUpdate)) {
+      echo "<script>
                 setTimeout(function(){
                     Swal.fire({
                         title: 'SUCCESS',
@@ -116,7 +136,7 @@ if(isset($_POST["editBarangMasuk"])){
                 },100)
               </script>";
     } else {
-        echo "<script>
+      echo "<script>
                 setTimeout(function(){
                     Swal.fire({
                         title: 'ERROR',
@@ -131,12 +151,15 @@ if(isset($_POST["editBarangMasuk"])){
 }
 
 // hapus barang
-if(isset($_POST{"hapus"})){
-  $id = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["id"]));
+if (isset($_POST["hapus_barang_masuk"])) {
+  $id = mysqli_real_escape_string(
+    $koneksi,
+    htmlspecialchars($_POST["id_barang"])
+  );
 
   $queryDelete = "DELETE FROM t_barang_masuk WHERE id = '$id'";
-  if(mysqli_query($koneksi, $queryDelete)) {
-        echo "<script>
+  if (mysqli_query($koneksi, $queryDelete)) {
+    echo "<script>
                 setTimeout(function(){
                     Swal.fire({
                         title: 'SUCCESS',
@@ -147,7 +170,7 @@ if(isset($_POST{"hapus"})){
                 },100)
               </script>";
   } else {
-        echo "<script>
+    echo "<script>
                 setTimeout(function(){
                     Swal.fire({
                         title: 'ERROR',

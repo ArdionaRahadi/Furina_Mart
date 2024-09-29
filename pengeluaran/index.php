@@ -5,8 +5,9 @@ include "../config/control.php";
 if (!isset($_SESSION["login"])) {
   header("location: ../login/");
 }
-?>
 
+$sqlSelect = select("SELECT * FROM t_barang_keluar");
+?>
 
 <!doctype html>
 <html lang="en">
@@ -25,6 +26,9 @@ if (!isset($_SESSION["login"])) {
 
     <!-- Boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.bootstrap5.css">
 
     <!-- My CSS -->
     <link rel="stylesheet" href="../css/style.css" />
@@ -84,7 +88,7 @@ if (!isset($_SESSION["login"])) {
                         <div class="ps-4">
                             <ul class="navbar-nav">
                                 <li class="mb-2 mt-1">
-                                    <a href="" class="px-2 nav-link">
+                                    <a href="../kasir/" class="px-2 nav-link">
                                         <span><i class="bi bi-cart pe-3"></i></span>
                                         <span>Kasir</span>
                                     </a>
@@ -169,43 +173,15 @@ if (!isset($_SESSION["login"])) {
                     <!-- Button trigger modal hapus semua -->
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <form class="d-flex justify-content-end" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-success" type="submit">
-                            Search
-                        </button>
-                    </form>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive-md">
-                        <table class="table text-center table-striped">
+                        <table class="table table-striped" id="table">
                             <thead>
                                 <tr class="table-primary">
                                     <th>#</th>
-                                    <th>No Barang</th>
+                                    <th>Barcode</th>
                                     <th>Nama Barang</th>
                                     <th>Harga</th>
                                     <th>Jumlah</th>
@@ -215,24 +191,40 @@ if (!isset($_SESSION["login"])) {
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $i = 1; ?>
+                                <?php foreach ($sqlSelect as $data): ?>
+                                <?php $subTotal =
+                                  $data["harga"] * $data["jumlah_barang"]; ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?= $i++ ?></td>
+                                    <td><?= $data["barcode"] ?></td>
+                                    <td><?= $data["nama_barang"] ?></td>
+                                    <td>Rp. <?= number_format(
+                                      $data["harga"],
+                                      0,
+                                      ",",
+                                      "."
+                                    ) ?></td>
+                                    <td><?= $data["jumlah_barang"] ?></td>
+                                    <td>Rp. <?= number_format(
+                                      $subTotal,
+                                      0,
+                                      ",",
+                                      "."
+                                    ) ?></td>
+                                    <td><?= $data["tanggal_keluar"] ?></td>
                                     <td>
                                         <div
                                             class="action-group d-flex gap-2 justify-content-center align-items-center">
                                             <span class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"><i class="bi bi-pencil-square"></i></span>
+                                                data-bs-target="#modalEdit<?= $i ?>"><i
+                                                    class="bi bi-pencil-square"></i></span>
                                             <span class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#modalHapus"><i class="bi bi-trash"></i></span>
+                                                data-bs-target="#modalHapus<?= $i ?>"><i class="bi bi-trash"></i></span>
                                         </div>
                                     </td>
                                 </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -250,29 +242,29 @@ if (!isset($_SESSION["login"])) {
                 <div class="modal-body">
                     <form method="post">
                         <div class="form-floating mb-3">
-                            <input name="noBarangKeluar" type="text" class="form-control" id="floatingNoBarang"
+                            <input name="barcode" type="number" class="form-control" id="floatingNoBarang"
                                 placeholder="No Barang" required />
-                            <label for="floatingNoBarang">No Barang</label>
+                            <label for="floatingNoBarang">Barcode</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="namaBarangKeluar" type="text" class="form-control" id="floatingNamaBarang"
+                            <input name="nama_barang" type="text" class="form-control" id="floatingNamaBarang"
                                 placeholder="Nama Barang" required />
                             <label for="floatingNamaBarang">Nama Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="hargaBarangKeluar" type="text" class="form-control" id="floatingHarga"
+                            <input name="harga_barang" type="number" class="form-control" id="floatingHarga"
                                 placeholder="Harga" required />
                             <label for="floatingHarga">Harga</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="jumlahBarangKeluar" type="number" class="form-control" id="floatingJumlah"
+                            <input name="jumlah_barang" type="number" class="form-control" id="floatingJumlah"
                                 placeholder="Jumlah" required />
                             <label for="floatingJumlah">Jumlah</label>
                         </div>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button name="tambahBarangKeluar" type="submit" class="btn btn-primary">
+                        <button name="tambah_barang_keluar" type="submit" class="btn btn-primary">
                             <span><i class="bi bi-floppy"></i></span>
                             <span>Save</span>
                         </button>
@@ -284,32 +276,50 @@ if (!isset($_SESSION["login"])) {
     <!-- modal form tambah -->
 
     <!-- Modal form edit -->
-    <div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <?php $i = 1; ?>
+    <?php foreach ($sqlSelect as $data): ?>
+    <?php $i++; ?>
+    <div class="modal fade" id="modalEdit<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     <form method="post">
+                        <input name="id_barang" type="hidden" value="<?= $data[
+                          "id"
+                        ] ?>">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingNoBarang" placeholder="No Barang" />
-                            <label for="floatingNoBarang">No Barang</label>
+                            <input value="<?= $data[
+                              "barcode"
+                            ] ?>" name="barcode" type="text"
+                                class="form-control" id="floatingNoBarang" placeholder="Barcode" />
+                            <label for="floatingNoBarang">Barcode</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingNamaBarang" placeholder="Nama Barang" />
+                            <input value="<?= $data[
+                              "nama_barang"
+                            ] ?>" name="nama_barang" type="text"
+                                class="form-control" id="floatingNamaBarang" placeholder="Nama Barang" />
                             <label for="floatingNamaBarang">Nama Barang</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingHarga" placeholder="Harga" />
+                            <input value="<?= $data[
+                              "harga"
+                            ] ?>" name="harga_barang" type="text"
+                                class="form-control" id="floatingHarga" placeholder="Harga" />
                             <label for="floatingHarga">Harga</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control" id="floatingJumlah" placeholder="Jumlah" />
+                            <input value="<?= $data[
+                              "jumlah_barang"
+                            ] ?>" name="jumlah_barang" type="number"
+                                class="form-control" id="floatingJumlah" placeholder="Jumlah" />
                             <label for="floatingJumlah">Jumlah</label>
                         </div>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button name="edit_barang_keluar" type="submit" class="btn btn-primary">
                             <span><i class="bi bi-floppy"></i></span>
                             <span>Save</span>
                         </button>
@@ -318,10 +328,14 @@ if (!isset($_SESSION["login"])) {
             </div>
         </div>
     </div>
+    <?php endforeach; ?>
     <!-- modal form edit -->
 
     <!-- Modal form hapus -->
-    <div class="modal fade" id="modalHapus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <?php $i = 1; ?>
+    <?php foreach ($sqlSelect as $data): ?>
+    <?php $i++; ?>
+    <div class="modal fade" id="modalHapus<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -330,10 +344,40 @@ if (!isset($_SESSION["login"])) {
                 </div>
                 <div class="modal-body">
                     <form method="post">
+                        <input name="id_barang" type="hidden" value="<?= $data[
+                          "id"
+                        ] ?>">
+                        <ul class="navbar-nav mb-3">
+                            <li>
+                                <p class="fw-bold fs-5  text-danger">Barcode: <?= $data[
+                                  "barcode"
+                                ] ?></p>
+                            </li>
+                            <li>
+                                <p class="fw-bold fs-5 text-danger">Nama Barang: <?= $data[
+                                  "nama_barang"
+                                ] ?></p>
+                            </li>
+                            <li>
+                                <p class="fw-bold fs-5 text-danger">Harga: Rp.
+                                    <?= number_format(
+                                      $data["harga"],
+                                      0,
+                                      ",",
+                                      "."
+                                    ) ?></p>
+                            </li>
+                            <li>
+                                <p class="fw-bold fs-5 text-danger">Jumlah: <?= $data[
+                                  "jumlah_barang"
+                                ] ?></p>
+                            </li>
+                        </ul>
+
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                             No
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button name="hapus_barang_keluar" type="submit" class="btn btn-primary">
                             <span>Yes</span>
                         </button>
                     </form>
@@ -341,15 +385,33 @@ if (!isset($_SESSION["login"])) {
             </div>
         </div>
     </div>
+    <?php endforeach; ?>
     <!-- modal form hapus -->
 
-    <!-- Bootstrap JS -->
+    <!-- Bootsrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
+
+    <!-- My Script -->
+    <script>
+    new DataTable('#table', {
+        ordering: false
+    });
+
+    // Disabel Confirm Resubmition
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
 </body>
 
 </html>
