@@ -145,47 +145,17 @@ if (!isset($_SESSION["login"])) {
 
     <!-- main -->
     <main class="my-3">
-        <div class="container">
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <h2 class="fw-bold">Kasir</h2>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-fluid" src="../img/comingSoon.png" alt="Coming Soon">
+            <div class="container text-center">
+              <h1>Coming Soon</h1>
+              <h1>😁😁😁</h1>
             </div>
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="table-responsive">
-                  <table class="table table-stripped">
-                    <thead>
-                      <tr class="table-primary">
-                        <th>No</th>
-                        <th>Barcode</th>
-                        <th>Nama Barang</th>
-                        <th>Harga</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>087543678</td>
-                        <td>Amplang</td>
-                        <td>Rp. 12.500</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+          </div>
         </div>
+      </div>
     </main>
     <!-- main -->
 

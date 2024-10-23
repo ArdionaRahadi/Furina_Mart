@@ -150,87 +150,17 @@ $sqlSelect = select("SELECT * FROM t_barang_keluar");
 
     <!-- main -->
     <main class="my-3">
-        <div class="container">
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <h2 class="fw-bold">Data Barang Keluar</h2>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <img class="img-fluid" src="../img/comingSoon.png" alt="Coming Soon">
+            <div class="container text-center">
+              <h1>Coming Soon</h1>
+              <h1>😁😁😁</h1>
             </div>
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <!-- Button trigger modal tambah -->
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalTambah">
-                        <span><i class="bi bi-plus-lg"></i></span>
-                        <span>Add</span>
-                    </button>
-                    <!-- Button trigger modal tambah -->
-
-                    <!-- Button trigger modal hapus semua -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapus">
-                        <span><i class="bi bi-trash"></i></span>
-                        <span>Delete All</span>
-                    </button>
-                    <!-- Button trigger modal hapus semua -->
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="table-responsive-md">
-                        <table class="table table-striped" id="table">
-                            <thead>
-                                <tr class="table-primary">
-                                    <th>#</th>
-                                    <th>Barcode</th>
-                                    <th>Nama Barang</th>
-                                    <th>Harga</th>
-                                    <th>Jumlah</th>
-                                    <th>Sub Total</th>
-                                    <th>Tanggal Keluar</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $i = 1; ?>
-                                <?php foreach ($sqlSelect as $data): ?>
-                                <?php $subTotal =
-                                  $data["harga"] * $data["jumlah_barang"]; ?>
-                                <tr>
-                                    <td><?= $i++ ?></td>
-                                    <td><?= $data["barcode"] ?></td>
-                                    <td><?= $data["nama_barang"] ?></td>
-                                    <td>Rp. <?= number_format(
-                                      $data["harga"],
-                                      0,
-                                      ",",
-                                      "."
-                                    ) ?></td>
-                                    <td><?= $data["jumlah_barang"] ?></td>
-                                    <td>Rp. <?= number_format(
-                                      $subTotal,
-                                      0,
-                                      ",",
-                                      "."
-                                    ) ?></td>
-                                    <td><?= $data["tanggal_keluar"] ?></td>
-                                    <td>
-                                        <div
-                                            class="action-group d-flex gap-2 justify-content-center align-items-center">
-                                            <span class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit<?= $i ?>"><i
-                                                    class="bi bi-pencil-square"></i></span>
-                                            <span class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#modalHapus<?= $i ?>"><i class="bi bi-trash"></i></span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </main>
     <!-- main -->
 
