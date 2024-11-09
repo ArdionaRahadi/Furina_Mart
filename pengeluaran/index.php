@@ -3,7 +3,7 @@ session_start();
 include "../config/control.php";
 
 if (!isset($_SESSION["login"])) {
-  header("location: ../login/");
+    header("location: ../login/");
 }
 
 $sqlSelect = select("SELECT * FROM t_barang_keluar");
@@ -28,21 +28,23 @@ $sqlSelect = select("SELECT * FROM t_barang_keluar");
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.bootstrap5.css">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.bootstrap5.css"> -->
 
     <!-- My CSS -->
     <link rel="stylesheet" href="../css/style.css" />
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <div class="group d-flex align-items-center">
-                <!-- offcanvas trigger -->
+
+                <!-- Offcanvas Trigger Start -->
                 <i class="bi bi-list text-white fs-3 navbar-toggler" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i>
-                <!-- offcanvas trigger -->
+                <!-- Offcanvas Trigger End -->
+
                 <a class="navbar-brand ms-2" href="#">Furina Mart</a>
             </div>
             <div class="dropdown">
@@ -63,9 +65,9 @@ $sqlSelect = select("SELECT * FROM t_barang_keluar");
             </div>
         </div>
     </nav>
-    <!-- Navbar -->
+    <!-- Navbar End -->
 
-    <!-- offcanvas -->
+    <!-- Offcanvas Start -->
     <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-body p-0">
@@ -146,176 +148,22 @@ $sqlSelect = select("SELECT * FROM t_barang_keluar");
             </ul>
         </div>
     </div>
-    <!-- offcanvas -->
+    <!-- Offcanvas End -->
 
-    <!-- main -->
+    <!-- Main Start -->
     <main class="my-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-fluid" src="../img/comingSoon.png" alt="Coming Soon">
-            <div class="container text-center">
-              <h1>Coming Soon</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <img class="img-fluid" src="../img/comingSoon.png" alt="Coming Soon">
+                    <div class="container text-center">
+                        <h1>Coming Soon</h1>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </main>
-    <!-- main -->
-
-    <!-- Modal form tambah -->
-    <div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form method="post">
-                        <div class="form-floating mb-3">
-                            <input name="barcode" type="number" class="form-control" id="floatingNoBarang"
-                                placeholder="No Barang" required />
-                            <label for="floatingNoBarang">Barcode</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input name="nama_barang" type="text" class="form-control" id="floatingNamaBarang"
-                                placeholder="Nama Barang" required />
-                            <label for="floatingNamaBarang">Nama Barang</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input name="harga_barang" type="number" class="form-control" id="floatingHarga"
-                                placeholder="Harga" required />
-                            <label for="floatingHarga">Harga</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input name="jumlah_barang" type="number" class="form-control" id="floatingJumlah"
-                                placeholder="Jumlah" required />
-                            <label for="floatingJumlah">Jumlah</label>
-                        </div>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                        <button name="tambah_barang_keluar" type="submit" class="btn btn-primary">
-                            <span><i class="bi bi-floppy"></i></span>
-                            <span>Save</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- modal form tambah -->
-
-    <!-- Modal form edit -->
-    <?php $i = 1; ?>
-    <?php foreach ($sqlSelect as $data): ?>
-    <?php $i++; ?>
-    <div class="modal fade" id="modalEdit<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form method="post">
-                        <input name="id_barang" type="hidden" value="<?= $data[
-                          "id"
-                        ] ?>">
-                        <div class="form-floating mb-3">
-                            <input value="<?= $data[
-                              "barcode"
-                            ] ?>" name="barcode" type="text"
-                                class="form-control" id="floatingNoBarang" placeholder="Barcode" />
-                            <label for="floatingNoBarang">Barcode</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input value="<?= $data[
-                              "nama_barang"
-                            ] ?>" name="nama_barang" type="text"
-                                class="form-control" id="floatingNamaBarang" placeholder="Nama Barang" />
-                            <label for="floatingNamaBarang">Nama Barang</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input value="<?= $data[
-                              "harga"
-                            ] ?>" name="harga_barang" type="text"
-                                class="form-control" id="floatingHarga" placeholder="Harga" />
-                            <label for="floatingHarga">Harga</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input value="<?= $data[
-                              "jumlah_barang"
-                            ] ?>" name="jumlah_barang" type="number"
-                                class="form-control" id="floatingJumlah" placeholder="Jumlah" />
-                            <label for="floatingJumlah">Jumlah</label>
-                        </div>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                        <button name="edit_barang_keluar" type="submit" class="btn btn-primary">
-                            <span><i class="bi bi-floppy"></i></span>
-                            <span>Save</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; ?>
-    <!-- modal form edit -->
-
-    <!-- Modal form hapus -->
-    <?php $i = 1; ?>
-    <?php foreach ($sqlSelect as $data): ?>
-    <?php $i++; ?>
-    <div class="modal fade" id="modalHapus<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Yakin Ingin Menghapus Data Ini?</h2>
-                </div>
-                <div class="modal-body">
-                    <form method="post">
-                        <input name="id_barang" type="hidden" value="<?= $data[
-                          "id"
-                        ] ?>">
-                        <ul class="navbar-nav mb-3">
-                            <li>
-                                <p class="fw-bold fs-5  text-danger">Barcode: <?= $data[
-                                  "barcode"
-                                ] ?></p>
-                            </li>
-                            <li>
-                                <p class="fw-bold fs-5 text-danger">Nama Barang: <?= $data[
-                                  "nama_barang"
-                                ] ?></p>
-                            </li>
-                            <li>
-                                <p class="fw-bold fs-5 text-danger">Harga: Rp.
-                                    <?= number_format(
-                                      $data["harga"],
-                                      0,
-                                      ",",
-                                      "."
-                                    ) ?></p>
-                            </li>
-                            <li>
-                                <p class="fw-bold fs-5 text-danger">Jumlah: <?= $data[
-                                  "jumlah_barang"
-                                ] ?></p>
-                            </li>
-                        </ul>
-
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            No
-                        </button>
-                        <button name="hapus_barang_keluar" type="submit" class="btn btn-primary">
-                            <span>Yes</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; ?>
-    <!-- modal form hapus -->
+    <!-- Main End -->
 
     <!-- Bootsrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -323,15 +171,16 @@ $sqlSelect = select("SELECT * FROM t_barang_keluar");
     </script>
 
     <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 
     <!-- DataTables JS -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script> -->
 
     <!-- My Script -->
-    <script>
+    <!-- <script>
+    // Data Tables
     new DataTable('#table', {
         ordering: false
     });
@@ -340,7 +189,7 @@ $sqlSelect = select("SELECT * FROM t_barang_keluar");
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
-    </script>
+    </script> -->
 </body>
 
 </html>

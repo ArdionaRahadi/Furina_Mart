@@ -3,7 +3,7 @@ session_start();
 include "../config/control.php";
 
 if (!isset($_SESSION["login"])) {
-  header("location: ../login/");
+    header("location: ../login/");
 }
 ?>
 
@@ -30,14 +30,16 @@ if (!isset($_SESSION["login"])) {
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <div class="group d-flex align-items-center">
-                <!-- offcanvas trigger -->
+
+                <!-- Offcanvas Trigger Start -->
                 <i class="bi bi-list text-white fs-3 navbar-toggler" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i>
-                <!-- offcanvas trigger -->
+                <!-- Offcanvas Trigger End -->
+
                 <a class="navbar-brand ms-2" href="#">Furina Mart</a>
             </div>
             <div class="dropdown">
@@ -60,7 +62,7 @@ if (!isset($_SESSION["login"])) {
     </nav>
     <!-- Navbar -->
 
-    <!-- offcanvas -->
+    <!-- Offcanvas Start -->
     <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-body p-0">
@@ -73,8 +75,9 @@ if (!isset($_SESSION["login"])) {
                     </a>
                 </li>
                 <li class="px-2 mb-1">
-                    <a class="p-2 bg-primary rounded nav-link d-flex align-items-center collapse-link" data-bs-toggle="collapse"
-                        href="#collapse-transaksi" role="button" aria-expanded="true" aria-controls="collapseExample">
+                    <a class="p-2 bg-primary rounded nav-link d-flex align-items-center collapse-link"
+                        data-bs-toggle="collapse" href="#collapse-transaksi" role="button" aria-expanded="true"
+                        aria-controls="collapseExample">
                         <span><i class="me-3 bx bxs-pie-chart-alt-2"></i></span>
                         <span>Transaksi</span>
                         <span class="right-icon ms-auto"><i class="bx bxs-chevron-right"></i></span>
@@ -141,22 +144,22 @@ if (!isset($_SESSION["login"])) {
             </ul>
         </div>
     </div>
-    <!-- offcanvas -->
+    <!-- Offcanvas End -->
 
-    <!-- main -->
+    <!-- Main Start -->
     <main class="my-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <img class="img-fluid" src="../img/comingSoon.png" alt="Coming Soon">
-            <div class="container text-center">
-              <h1>Coming Soon</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <img class="img-fluid" src="../img/comingSoon.png" alt="Coming Soon">
+                    <div class="container text-center">
+                        <h1>Coming Soon</h1>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </main>
-    <!-- main -->
+    <!-- Main End -->
 
     <!-- Bootsrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -164,7 +167,7 @@ if (!isset($_SESSION["login"])) {
     </script>
 
     <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 </body>
 
 </html>
