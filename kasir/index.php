@@ -151,7 +151,6 @@ if (!isset($_SESSION["login"])) {
             <img class="img-fluid" src="../img/comingSoon.png" alt="Coming Soon">
             <div class="container text-center">
               <h1>Coming Soon</h1>
-              <h1>😁😁😁</h1>
             </div>
           </div>
         </div>

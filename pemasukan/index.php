@@ -242,7 +242,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                 <div class="modal-body">
                     <form method="post">
                         <div class="form-floating mb-3">
-                            <input name="barcode" type="number" class="form-control" id="floatingNoBarang"
+                            <input minlength="9" maxlength="9" pattern=".{9}" name="barcode" type="number" class="form-control" id="floatingNoBarang"
                                 placeholder="No Barang" required />
                             <label for="floatingNoBarang">Barcode</label>
                         </div>

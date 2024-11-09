@@ -15,70 +15,95 @@ function select($querySelect)
 
 // Tambah
 if (isset($_POST["tambah_barang_masuk"])) {
-  $barcode = mysqli_real_escape_string(
-    $koneksi,
-    htmlspecialchars($_POST["barcode"])
-  );
-  $namaBarang = mysqli_real_escape_string(
-    $koneksi,
-    htmlspecialchars(ucwords($_POST["nama_barang"]))
-  );
-  $hargaBarang = mysqli_real_escape_string(
-    $koneksi,
-    htmlspecialchars($_POST["harga_barang"])
-  );
-  $jumlahBarang = mysqli_real_escape_string(
-    $koneksi,
-    htmlspecialchars($_POST["jumlah_barang"])
-  );
-
-  if (
-    $barcode === "" ||
-    $namaBarang === "" ||
-    $hargaBarang === "" ||
-    $jumlahBarang === ""
-  ) {
-    echo "<script>
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $barcode = trim(
+      mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["barcode"]))
+    );
+    $namaBarang = trim(
+      mysqli_real_escape_string(
+        $koneksi,
+        htmlspecialchars(ucwords($_POST["nama_barang"]))
+      )
+    );
+    $hargaBarang = trim(
+      mysqli_real_escape_string(
+        $koneksi,
+        htmlspecialchars($_POST["harga_barang"])
+      )
+    );
+    $jumlahBarang = trim(
+      mysqli_real_escape_string(
+        $koneksi,
+        htmlspecialchars($_POST["jumlah_barang"])
+      )
+    );
+    if (
+      empty($barcode) ||
+      empty($namaBarang) ||
+      empty($hargaBarang) ||
+      empty($jumlahBarang)
+    ) {
+      echo "<script>
+                  setTimeout(function(){
+                      Swal.fire({
+                          title: 'ERROR',
+                          text: 'Inputan Tidak Boleh Kosong',
+                          icon: 'error',
+                          allowOutsideClick: false
+                      })
+                  },100)
+                </script>";
+    } else {
+      if (
+        strlen($barcode) !== 8 &&
+        strlen($barcode) !== 9 &&
+        strlen($barcode) !== 10 &&
+        strlen($barcode) !== 11 &&
+        strlen($barcode) !== 12
+      ) {
+        echo "<script>
+                    setTimeout(function(){
+                        Swal.fire({
+                          title: 'ERROR',
+                          text: 'Panjang Barcode Harus 8 - 12',
+                          icon: 'error',
+                          allowOutsideClick: false
+                        })
+                    },100)
+                  </script>";
+      } else {
+        $queryInsert = "INSERT INTO t_barang_masuk VALUES (
+                              NULL,
+                              '$barcode',
+                             '$namaBarang',
+                              $hargaBarang,
+                              $jumlahBarang,
+                              NOW()
+                          )";
+        if (mysqli_query($koneksi, $queryInsert)) {
+          echo "<script>
+                  setTimeout(function(){
+                    Swal.fire({
+                      title: 'SUCCESS',
+                      text: 'Data Berhasil Di Tambahkan',
+                      icon: 'success',
+                      allowOutsideClick: false
+                    })
+                  },100)
+                </script>";
+        } else {
+          echo "<script>
                 setTimeout(function(){
                     Swal.fire({
-                        title: 'ERROR',
-                        text: 'Inputan Tidak Boleh Kosong',
-                        icon: 'error',
-                        allowOutsideClick: false
+                      title: 'ERROR',
+                      text: 'Data Gagal Di Tambahkan',
+                      icon: 'error',
+                      allowOutsideClick: false
                     })
                 },100)
               </script>";
-  } else {
-    $queryInsert = "INSERT INTO t_barang_masuk VALUES (
-                            NULL,
-                            '$barcode',
-                           '$namaBarang',
-                            $hargaBarang,
-                            $jumlahBarang,
-                            NOW()
-                        )";
-    if (mysqli_query($koneksi, $queryInsert)) {
-      echo "<script>
-                setTimeout(function(){
-                  Swal.fire({
-                    title: 'SUCCESS',
-                    text: 'Data Berhasil Di Tambahkan',
-                    icon: 'success',
-                    allowOutsideClick: false
-                  })
-                },100)
-              </script>";
-    } else {
-      echo "<script>
-              setTimeout(function(){
-                  Swal.fire({
-                    title: 'SUCCESS',
-                    text: 'Data Berhasil Di Tambahkan',
-                    icon: 'success',
-                    allowOutsideClick: false
-                  })
-              },100)
-            </script>";
+        }
+      }
     }
   }
 }
