@@ -3,19 +3,19 @@ session_start();
 include "../config/control.php";
 
 // cek sesi
-if(isset($_SESSION["login"])){
+if (isset($_SESSION["login"])) {
     header("location: ../");
 }
 
 // Cek Tombol Login Di klik
-if(isset($_POST["login"])){
+if (isset($_POST["login"])) {
 
     // Mengambil Inputan User
     $username = mysqli_real_escape_string($koneksi, htmlspecialchars(strtolower($_POST["username"])));
     $password = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["password"]));
 
     // Validasi Jika User Tidak Menginputkan Apa-Apa
-    if($username === "" || $password === ""){
+    if ($username === "" || $password === "") {
         $error = true;
     } else {
         $select = "SELECT * FROM t_users WHERE username = '$username'";
@@ -23,18 +23,16 @@ if(isset($_POST["login"])){
         $result = mysqli_fetch_assoc($querySelect);
 
         // Cek Baris DI Tabel t_users
-        if(mysqli_num_rows($querySelect)){
-            if(password_verify($password, $result["password"])){
+        if (mysqli_num_rows($querySelect)) {
+            if (password_verify($password, $result["password"])) {
                 $_SESSION["login"] = $result["username"];
                 header("location: ../");
-            }else {
+            } else {
                 $errorPassword = true;
             }
-        }else {
+        } else {
             $errorUsername = true;
         }
-
-        
     }
 }
 
@@ -64,29 +62,29 @@ if(isset($_POST["login"])){
                     <form autocomplete="off" method="post" style="background: #fff;" class="rounded-4 p-4 form">
                         <h1 class="mb-5 text-center fw-bold">LOGIN</h1>
                         <!-- Pesan Jika Inputan Kosong -->
-                        <?php if(isset($error)) : ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Semua Inputan Wajib Di isi</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
+                        <?php if (isset($error)) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Semua Inputan Wajib Di isi</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         <?php endif ?>
                         <!-- Pesan Jika Inputan Kosong -->
 
                         <!-- Pesan Jika Username Tidak Ada -->
-                        <?php if(isset($errorUsername)) : ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Username Tidak Terdaftar</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
+                        <?php if (isset($errorUsername)) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Username Tidak Terdaftar</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         <?php endif ?>
                         <!-- Pesan Jika Username Tidak Ada -->
 
                         <!-- Pesan Jika Password Salah -->
-                        <?php if(isset($errorPassword)) : ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Password Salah</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
+                        <?php if (isset($errorPassword)) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Password Salah</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         <?php endif ?>
                         <!-- Pesan Jika Password Salah -->
 

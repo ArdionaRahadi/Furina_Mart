@@ -3,13 +3,13 @@ session_start();
 include "config/control.php";
 
 if (!isset($_SESSION["login"])) {
-  header("location: login/");
+    header("location: login/");
 }
 
 $sqlSelect = select("SELECT * FROM t_barang_masuk");
 $totalBarang = 0;
 foreach ($sqlSelect as $data) {
-  $totalBarang += $data["jumlah_barang"];
+    $totalBarang += $data["jumlah_barang"];
 }
 ?>
 <!doctype html>
@@ -35,14 +35,16 @@ foreach ($sqlSelect as $data) {
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <div class="group d-flex align-items-center">
-                <!-- offcanvas trigger -->
+
+                <!-- Offcanvas Trigger Start -->
                 <i class="bi bi-list text-white fs-3 navbar-toggler" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i>
-                <!-- offcanvas trigger -->
+                <!-- Offcanvas Trigger End -->
+
                 <a class="navbar-brand ms-2" href="#">Furina Mart</a>
             </div>
             <div class="dropdown">
@@ -63,9 +65,9 @@ foreach ($sqlSelect as $data) {
             </div>
         </div>
     </nav>
-    <!-- Navbar -->
+    <!-- Navbar End -->
 
-    <!-- offcanvas -->
+    <!-- Offcanvas Start -->
     <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-body p-0">
@@ -146,9 +148,9 @@ foreach ($sqlSelect as $data) {
             </ul>
         </div>
     </div>
-    <!-- offcanvas -->
+    <!-- Offcanvas End -->
 
-    <!-- main -->
+    <!-- Main Start -->
     <main class="my-3">
         <div class="container-fluid">
             <div class="row mb-3">
@@ -206,7 +208,7 @@ foreach ($sqlSelect as $data) {
             </div>
         </div>
     </main>
-    <!-- main -->
+    <!-- Main End -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
