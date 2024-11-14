@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 09, 2024 at 01:30 PM
+-- Generation Time: Nov 14, 2024 at 04:08 AM
 -- Server version: 11.4.2-MariaDB-log
 -- PHP Version: 8.3.7
 
@@ -32,7 +32,8 @@ CREATE TABLE `t_barang_keluar` (
   `barcode` varchar(20) NOT NULL,
   `nama_barang` varchar(255) NOT NULL,
   `harga` int(11) NOT NULL,
-  `jumlah_barang` int(11) NOT NULL
+  `jumlah_barang` int(11) NOT NULL,
+  `tanggal_keluar` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -47,8 +48,16 @@ CREATE TABLE `t_barang_masuk` (
   `nama_barang` varchar(255) NOT NULL,
   `harga` int(11) NOT NULL,
   `jumlah_barang` int(11) NOT NULL,
-  `tanggal_masuk` timestamp NOT NULL
+  `tanggal_masuk` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `t_barang_masuk`
+--
+
+INSERT INTO `t_barang_masuk` (`id`, `barcode`, `nama_barang`, `harga`, `jumlah_barang`, `tanggal_masuk`) VALUES
+(34, '7658904783', 'Menjes', 1000, 2, 1731554604000),
+(35, '8765498306', 'Fanta', 5000, 10, 1731557208000);
 
 -- --------------------------------------------------------
 
@@ -108,7 +117,7 @@ ALTER TABLE `t_barang_keluar`
 -- AUTO_INCREMENT for table `t_barang_masuk`
 --
 ALTER TABLE `t_barang_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `t_users`

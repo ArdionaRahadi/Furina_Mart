@@ -90,7 +90,7 @@ if (isset($_POST["tambah_barang_masuk"])) {
                              '$namaBarang',
                               $hargaBarang,
                               $jumlahBarang,
-                              NOW()
+                              UNIX_TIMESTAMP()*1000
                           )";
       if (mysqli_query($koneksi, $queryInsert)) {
         echo "<script>
@@ -197,7 +197,7 @@ if (isset($_POST["edit_barang_masuk"])) {
                     },100)
                   </script>";
     } else {
-      $queryUpdate = "UPDATE t_barang_masuk SET barcode = '$barcode', nama_barang = '$namaBarang', harga = $hargaBarang, jumlah_barang = $jumlahBarang WHERE id = $idBarang";
+      $queryUpdate = "UPDATE t_barang_masuk SET barcode = '$barcode', nama_barang = '$namaBarang', harga = $hargaBarang, jumlah_barang = $jumlahBarang, tanggal_masuk = UNIX_TIMESTAMP()*1000 WHERE id = $idBarang";
       if (mysqli_query($koneksi, $queryUpdate)) {
         echo "<script>
                 setTimeout(function(){
