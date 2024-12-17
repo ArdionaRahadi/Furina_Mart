@@ -4,38 +4,42 @@ include "../config/control.php";
 
 // cek sesi
 if (isset($_SESSION["login"])) {
-    header("location: ../");
+  header("location: ../");
 }
 
 // Cek Tombol Login Di klik
 if (isset($_POST["login"])) {
+  // Mengambil Inputan User
+  $username = mysqli_real_escape_string(
+    $koneksi,
+    htmlspecialchars(strtolower($_POST["username"]))
+  );
+  $password = mysqli_real_escape_string(
+    $koneksi,
+    htmlspecialchars($_POST["password"])
+  );
 
-    // Mengambil Inputan User
-    $username = mysqli_real_escape_string($koneksi, htmlspecialchars(strtolower($_POST["username"])));
-    $password = mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["password"]));
+  // Validasi Jika User Tidak Menginputkan Apa-Apa
+  if ($username === "" || $password === "") {
+    $error = true;
+  } else {
+    $select = "SELECT * FROM t_users WHERE username = '$username'";
+    $querySelect = mysqli_query($koneksi, $select);
+    $result = mysqli_fetch_assoc($querySelect);
 
-    // Validasi Jika User Tidak Menginputkan Apa-Apa
-    if ($username === "" || $password === "") {
-        $error = true;
+    // Cek Baris DI Tabel t_users
+    if (mysqli_num_rows($querySelect)) {
+      if (password_verify($password, $result["password"])) {
+        $_SESSION["login"] = $result["username"];
+        header("location: ../");
+      } else {
+        $errorPassword = true;
+      }
     } else {
-        $select = "SELECT * FROM t_users WHERE username = '$username'";
-        $querySelect = mysqli_query($koneksi, $select);
-        $result = mysqli_fetch_assoc($querySelect);
-
-        // Cek Baris DI Tabel t_users
-        if (mysqli_num_rows($querySelect)) {
-            if (password_verify($password, $result["password"])) {
-                $_SESSION["login"] = $result["username"];
-                header("location: ../");
-            } else {
-                $errorPassword = true;
-            }
-        } else {
-            $errorUsername = true;
-        }
+      $errorUsername = true;
     }
+  }
 }
-
 ?>
 
 <!doctype html>
@@ -57,55 +61,55 @@ if (isset($_POST["login"])) {
 <body>
     <div class="background-image">
         <div class="container">
-            <div style="height: 100vh;" class="row justify-content-center align-items-center">
-                <div class="col-lg-6">
-                    <form autocomplete="off" method="post" style="background: #fff;" class="rounded-4 p-4 form">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-md-9">
+                    <form autocomplete="off" method="post" class="rounded-4 p-4 form">
                         <h1 class="mb-5 text-center fw-bold">LOGIN</h1>
                         <!-- Pesan Jika Inputan Kosong -->
-                        <?php if (isset($error)) : ?>
+                        <?php if (isset($error)): ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Semua Inputan Wajib Di isi</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        <?php endif ?>
+                        <?php endif; ?>
                         <!-- Pesan Jika Inputan Kosong -->
 
                         <!-- Pesan Jika Username Tidak Ada -->
-                        <?php if (isset($errorUsername)) : ?>
+                        <?php if (isset($errorUsername)): ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Username Tidak Terdaftar</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        <?php endif ?>
+                        <?php endif; ?>
                         <!-- Pesan Jika Username Tidak Ada -->
 
                         <!-- Pesan Jika Password Salah -->
-                        <?php if (isset($errorPassword)) : ?>
+                        <?php if (isset($errorPassword)): ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Password Salah</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        <?php endif ?>
+                        <?php endif; ?>
                         <!-- Pesan Jika Password Salah -->
 
                         <div class="mb-4">
-                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <label for="exampleInputEmail1" class="form-label fw-bold">Username</label>
                             <input name="username" type="text" class="form-control" id="exampleInputEmail1"
                                 aria-describedby="emailHelp" required />
                         </div>
                         <div class="mb-4">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label fw-bold">Password</label>
                             <input name="password" type="password" class="form-control password" id="password"
                                 required />
                         </div>
-                        <div class="mb-4 form-check">
-                            <input style="cursor: pointer" type="checkbox" class="form-check-input" id="show-pw" />
-                            <label style="cursor: pointer" class="form-check-label" for="show-pw">Show Password</label>
+                        <div class="mb-4 form-check d-flex gap-1">
+                            <input type="checkbox" class="form-check-input cursor-pointer" id="show-pw" />
+                            <label class="form-check-label cursor-pointer" for="show-pw">Show Password</label>
                         </div>
                         <button name="login" type="submit" class="btn btn-primary fw-bold mb-3 login">
                             Log in
                         </button>
-                        <a class="text-center text-black text-decoration-none" href="">
+                        <a class="text-center text-decoration-none" href="">
                             <p>Forgot Password?</p>
                         </a>
                     </form>

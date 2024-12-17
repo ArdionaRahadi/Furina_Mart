@@ -215,7 +215,7 @@ $sqlSelect = select("SELECT * FROM t_barang_masuk");
                                                     ",",
                                                     "."
                                                 ) ?></td>
-                                        <td><?= date("d/m/Y H:i", $data['tanggal_masuk'] / 1000) ?></td>
+                                        <td><?= date("d/m/Y H:i", $data['tanggal_masuk'] / 1000) ?> WIB</td>
                                         <td>
                                             <div
                                                 class="action-group d-flex gap-2 justify-content-center align-items-center">

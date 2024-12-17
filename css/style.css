@@ -3,10 +3,16 @@
   --topNavbarHeight: 56px;
 }
 
+/* Login */
 .background-image {
   height: 100vh;
   background: url(../img/furina.jpeg) no-repeat;
   background-size: cover;
+  background-position: center;
+}
+
+.form {
+  background: rgba(234, 234, 234, 1);
 }
 
 .login {
@@ -19,6 +25,31 @@
     rgba(0, 212, 255, 1) 82%
   );
 }
+
+.h-100 {
+  min-height: 100vh;
+}
+
+div.form-check input[type=checkbox] {
+  box-shadow: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+  box-shadow: none;
+}
+
+div label.form-label::after {
+  content: "*";
+  color: red;
+  margin-left: 2px;
+}
+
+div input[type=text]:focus, 
+div input[type=password]:focus {
+  box-shadow: 0px 0px 0px 4px rgba(105,138,232, 0.5);
+}
+/* Login */
 
 div#offcanvasExample {
   width: var(--offcanvas-width);

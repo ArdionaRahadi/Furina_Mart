@@ -66,13 +66,17 @@ if (isset($_POST["tambah_barang_masuk"])) {
                       setTimeout(function(){
                           Swal.fire({
                             title: 'ERROR',
-                            text: 'Panjang Barcode Harus 8 - 12',
+                            text: 'Panjang Barcode Minimal 8 Angka & Maksimal 12 Angka',
                             icon: 'error',
                             allowOutsideClick: false
                           })
                       },100)
                     </script>";
-    } elseif (!ctype_digit($barcode) || !ctype_digit($hargaBarang) || !ctype_digit($jumlahBarang)) {
+    } elseif (
+      !ctype_digit($barcode) ||
+      !ctype_digit($hargaBarang) ||
+      !ctype_digit($jumlahBarang)
+    ) {
       echo "<script>
                     setTimeout(function(){
                         Swal.fire({
@@ -128,10 +132,7 @@ if (isset($_POST["edit_barang_masuk"])) {
       htmlspecialchars($_POST["id_barang"])
     );
     $barcode = trim(
-      mysqli_real_escape_string(
-        $koneksi,
-        htmlspecialchars($_POST["barcode"])
-      )
+      mysqli_real_escape_string($koneksi, htmlspecialchars($_POST["barcode"]))
     );
     $namaBarang = trim(
       mysqli_real_escape_string(
@@ -185,7 +186,11 @@ if (isset($_POST["edit_barang_masuk"])) {
                           })
                       },100)
                     </script>";
-    } elseif (!ctype_digit($barcode) || !ctype_digit($hargaBarang) || !ctype_digit($jumlahBarang)) {
+    } elseif (
+      !ctype_digit($barcode) ||
+      !ctype_digit($hargaBarang) ||
+      !ctype_digit($jumlahBarang)
+    ) {
       echo "<script>
                     setTimeout(function(){
                         Swal.fire({
