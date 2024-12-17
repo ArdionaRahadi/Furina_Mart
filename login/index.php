@@ -62,7 +62,7 @@ if (isset($_POST["login"])) {
     <div class="background-image">
         <div class="container">
             <div class="row justify-content-center align-items-center h-100">
-                <div class="col-md-9">
+                <div class="col-lg-5">
                     <form autocomplete="off" method="post" class="rounded-4 p-4 form">
                         <h1 class="mb-5 text-center fw-bold">LOGIN</h1>
                         <!-- Pesan Jika Inputan Kosong -->
@@ -92,17 +92,23 @@ if (isset($_POST["login"])) {
                         <?php endif; ?>
                         <!-- Pesan Jika Password Salah -->
 
-                        <div class="mb-4">
-                            <label for="exampleInputEmail1" class="form-label fw-bold">Username</label>
+                        <div class="mb-3 position-relative">
+                            <label for="exampleInputEmail1" class="form-label fw-bold">
+                              Username
+                              <img class="logo" src="../img/user.svg" alt="">
+                              </label>
                             <input name="username" type="text" class="form-control" id="exampleInputEmail1"
                                 aria-describedby="emailHelp" required />
                         </div>
-                        <div class="mb-4">
-                            <label for="password" class="form-label fw-bold">Password</label>
+                        <div class="mb-3 position-relative">
+                            <label for="password" class="form-label fw-bold">
+                              Password
+                              <img class="logo" src="../img/password.svg" alt="">
+                              </label>
                             <input name="password" type="password" class="form-control password" id="password"
                                 required />
                         </div>
-                        <div class="mb-4 form-check d-flex gap-1">
+                        <div class="mb-3 form-check d-flex gap-1">
                             <input type="checkbox" class="form-check-input cursor-pointer" id="show-pw" />
                             <label class="form-check-label cursor-pointer" for="show-pw">Show Password</label>
                         </div>
