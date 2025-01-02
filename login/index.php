@@ -64,7 +64,10 @@ if (isset($_POST["login"])) {
             <div class="row justify-content-center align-items-center h-100">
                 <div class="col-lg-5">
                     <form autocomplete="off" method="post" class="rounded-4 p-4 form">
-                        <h1 class="mb-5 text-center fw-bold">LOGIN</h1>
+                      <div class="thumb-container d-flex justify-content-center align-item-center mb-3">
+                          <img class="thumb" src="../img/logo.png" alt="">
+                      </div>
+
                         <!-- Pesan Jika Inputan Kosong -->
                         <?php if (isset($error)): ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -115,7 +118,7 @@ if (isset($_POST["login"])) {
                         <button name="login" type="submit" class="btn btn-primary fw-bold mb-3 login">
                             Log in
                         </button>
-                        <a class="text-center text-decoration-none" href="">
+                        <a class="text-center text-decoration-underline" id="forgot-password">
                             <p>Forgot Password?</p>
                         </a>
                     </form>
@@ -129,6 +132,9 @@ if (isset($_POST["login"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    
+    <!-- Sweet Alert 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- My JS -->
     <script src="../js/script.js"></script>

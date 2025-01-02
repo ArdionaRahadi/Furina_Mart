@@ -47,8 +47,13 @@ div label.form-label::after {
 div input[type=text]:focus, 
 div input[type=password]:focus {
   box-shadow: 0px 0px 0px 4px rgba(105,138,232, 0.5);
+}
+
+div input[type=text], 
+div input[type=password] {
   padding-left: 33px;
 }
+
 
 .logo {
   position: absolute;
@@ -56,6 +61,10 @@ div input[type=password]:focus {
   left: 8px;
   background: #fff;
   width: 20px;
+}
+
+.thumb-container .thumb {
+  width: 320px;
 }
 /* Login */
 
